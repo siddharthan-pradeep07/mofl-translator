@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mofl Translator</title>
+    <style>
+        #output {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1px; /* Reduced space between letters */
+        }
+        .mofl-letter {
+            width: 60px; /* Larger size */
+            height: 60px;
+            filter: brightness(0.6); /* Darker images */
+        }
+        .space {
+            width: 20px; /* Space for spacebar */
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mofl Translator</h1>
+    <p>Type in English </p>
+    <input type="text" id="inputText" placeholder="Type here..." oninput="convertToMofl()" />
+    <div id="output"></div>
+
+    <script>
+        // Map each allowed letter to its image path (replace with your image paths)
+        const moflMap = {
+            'a': 'a.png',
+            'b': 'b.png',
+            'd': 'd.png',
+            'e': 'e.png',
+            'f': 'f.png',
+            'g': 'g.png',
+            'h': 'h.png',
+            'i': 'i.png',
+            'j': 'j.png',
+            'k': 'k.png',
+            'l': 'l.png',
+            'm': 'm.png',
+            'n': 'n.png',
+            'o': 'o.png',
+            'p': 'p.png',
+            'r': 'r.png',
+            's': 's.png',
+            't': 't.png',
+            'u': 'u.png',
+            'v': 'v.png',
+            'q': 'a2.png',
+            'w': 'extension.png',
+            // Add more letters as needed
+        };
+
+        function convertToMofl() {
+            const input = document.getElementById('inputText').value.toLowerCase();
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+
+            for (let char of input) {
+                if (char === ' ') {
+                    const space = document.createElement('div');
+                    space.classList.add('space');
+                    output.appendChild(space);
+                } else if (moflMap[char]) {
+                    const img = document.createElement('img');
+                    img.src = moflMap[char];
+                    img.alt = char;
+                    img.classList.add('mofl-letter');
+                    output.appendChild(img);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
